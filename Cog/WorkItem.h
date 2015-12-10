@@ -7,8 +7,11 @@ namespace Cog
 	class WorkItem
 	{
 	public:
-		WorkItem(std::function<void()> *aWork);
+		WorkItem(std::function<void()> &aWork);
+		WorkItem(WorkItem &&aWorkItem);
 		~WorkItem();
+
+		WorkItem &operator=(WorkItem &&aWorkItem);
 
 		void Wait();
 		void DoWork();

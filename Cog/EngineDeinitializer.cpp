@@ -1,5 +1,6 @@
 #include "EngineDeinitializer.h"
 #include "Engine.h"
+#include <assert.h>
 
 namespace Cog
 {
@@ -9,6 +10,6 @@ namespace Cog
 
 	EngineDeinitializer::~EngineDeinitializer()
 	{
-		Engine::Destruct();
+		assert(Engine::IsInitialized() == false);
 	}
 }

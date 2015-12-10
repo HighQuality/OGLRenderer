@@ -19,6 +19,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Start it
 	Cog::Engine::StartGame();
 
+	// De-initialize the engine and free all memory allocated by it
+	Cog::Engine::Destruct();
+
 	return 0;
 }
 

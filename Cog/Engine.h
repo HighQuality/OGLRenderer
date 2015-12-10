@@ -24,6 +24,7 @@ namespace Cog
 		static EventHost *GetEventHost();
 		static SceneHost *GetSceneHost();
 		static void ScheduleRendering(const RenderCommand &aRenderCommand);
+		static bool IsInitialized();
 
 	private:
 		// Disable object instantiation

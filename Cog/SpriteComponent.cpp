@@ -19,7 +19,7 @@ namespace Cog
 	void SpriteComponent::EndUpdate(EndUpdateEvent &aEvent)
 	{
 		previousPosition = currentPosition;
-		currentPosition = myObject->GetPosition();
+		currentPosition = myObject->GetPosition() - Vector2f(myTexture->GetSize()) / 2.f;
 	}
 
 	void SpriteComponent::Draw(DrawEvent &aEvent)

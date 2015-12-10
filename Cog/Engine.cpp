@@ -24,13 +24,13 @@ namespace Cog
 	std::vector<RenderCommand> *Engine::myNewRenderCommands = nullptr;
 	EngineDeinitializer Engine::myDeinitializer;
 	float Engine::myTimeAccumulator = 0.f,
-		Engine::myTimeStep = 1.f / 5.f;
+		Engine::myTimeStep = 1.f / 15.f;
 	
 	void Engine::InnerInitialize()
 	{
 		myEventHost = new EventHost();
 		mySceneHost = new SceneHost();
-		myThreadPool = new ThreadPool(4);
+		myThreadPool = new ThreadPool();
 		myNewRenderCommands = new std::vector<RenderCommand>();
 
 		// Create a hidden window and a graphics context
@@ -106,7 +106,7 @@ namespace Cog
 			myRenderer->Clear();
 			RenderTarget &renderTarget = *myRenderer->GetRenderTarget();
 			
-			for (int i = 0; i < currentRenderCommands->size(); i++)
+			for (size_t i = 0; i < currentRenderCommands->size(); i++)
 			{
 				RenderCommand currentCommand = (*currentRenderCommands)[i];
 
@@ -150,6 +150,11 @@ namespace Cog
 	void Engine::ScheduleRendering(const RenderCommand &aRenderCommand)
 	{
 		myNewRenderCommands->push_back(aRenderCommand);
+	}
+
+	bool Engine::IsInitialized()
+	{
+		return myIsInitialized;
 	}
 	
 	Engine::Engine()

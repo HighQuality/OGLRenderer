@@ -13,7 +13,7 @@ namespace Cog
 	class ThreadPool
 	{
 	public:
-		ThreadPool(int aNumberOfWorkers);
+		ThreadPool();
 		std::shared_ptr<WorkItem> QueueWorkItem(std::function<void()> &aWorkItem);
 		~ThreadPool();
 
