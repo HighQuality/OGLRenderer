@@ -34,7 +34,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	int resolutionWidth = 1280;
 	int resolutionHeight = 720;
 	SDL_WindowFlags flags = (SDL_WindowFlags)(SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-
+	
 	SDL_Window *win = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, resolutionWidth, resolutionHeight, flags);
 	if (win == nullptr){
 		std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
@@ -64,8 +64,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 	}
 	
-	int rot;
-
 	{
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
@@ -111,7 +109,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			int w,
 				h;
 			SDL_GetWindowSize(win, &w, &h);
-			batch.viewSize = Vector2(w, h);
+			batch.viewSize = Vector2(static_cast<float>(w), static_cast<float>(h));
 			glViewport(0, 0, w, h);
 
 			shader.Use();
@@ -121,7 +119,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			Sprite sprite;
 			sprite.texture = &texture;
-			sprite.origin = Vector2(sprite.texture->width / 2, sprite.texture->height / 2);
+			sprite.origin = Vector2(static_cast<float>(sprite.texture->width) / 2.f, static_cast<float>(sprite.texture->height) / 2.f);
 			sprite.position = Vector2(320, 240);
 			batch.Draw(sprite);
 
