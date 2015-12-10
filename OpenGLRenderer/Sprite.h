@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Texture.h"
+#include "OpenGLTexture.h"
 #include "Vector3.h"
 
 struct Sprite
 {
 public:
-	Texture *texture;
+	OpenGLTexture *texture;
 	Vector2 position;
 	Vector2 origin;
 	Vector4 color;

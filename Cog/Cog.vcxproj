@@ -11,34 +11,63 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AwaitableSignal.h" />
     <ClInclude Include="CloseButtonPressedEvent.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DrawEvent.h" />
+    <ClInclude Include="EndUpdateEvent.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineDeinitializer.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventCollection.h" />
     <ClInclude Include="EventHost.h" />
     <ClInclude Include="EventListener.h" />
+    <ClInclude Include="ExitingEvent.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectComponent.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="IEventListener.h" />
+    <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="InitializeEvent.h" />
+    <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="RendererModule.h" />
+    <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="SceneHost.h" />
+    <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="Stopwatch.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="UpdateEvent.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Vector4.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WorkItem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AwaitableSignal.cpp" />
     <ClCompile Include="CloseButtonPressedEvent.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DrawEvent.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineDeinitializer.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventHost.cpp" />
+    <ClCompile Include="ExitingEvent.cpp" />
+    <ClCompile Include="GameObjectComponent.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="IEventListener.cpp" />
-    <ClCompile Include="InitializeEvent.cpp" />
+    <ClCompile Include="IGameObject.cpp" />
     <ClCompile Include="RendererModule.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="SceneHost.cpp" />
+    <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="Stopwatch.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="UpdateEvent.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WorkItem.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4357CE88-F5FE-464C-8885-75935395CC49}</ProjectGuid>

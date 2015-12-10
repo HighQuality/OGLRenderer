@@ -6,18 +6,28 @@
 #include <Engine.h>
 #include <CloseButtonPressedEvent.h>
 #include <EventHost.h>
+#include "OpenGLTexture.h"
+#include "Shader.h"
+#include "SpriteBatch.h"
 
 OpenGLRenderer::OpenGLRenderer()
 {
-
+	myDefaultShader = nullptr;
+	mySpriteBatch = nullptr;
 }
 
 OpenGLRenderer::~OpenGLRenderer()
 {
+	delete myDefaultShader;
+	myDefaultShader = nullptr;
+
+	delete mySpriteBatch;
+	mySpriteBatch = nullptr;
+
 	SDL_GL_DeleteContext(myContext);
 	SDL_DestroyWindow(myWindow);
 	SDL_Quit();
-	
+		
 	myContext = nullptr;
 	myWindow = nullptr;
 }
@@ -73,12 +83,33 @@ Cog::Window *OpenGLRenderer::CreateHiddenWindowAndContext()
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	myDefaultShader = new Shader();
+	mySpriteBatch = new SpriteBatch();
+
 	return this;
 }
 
 Cog::Window *OpenGLRenderer::GetWindow()
 {
 	return this;
+}
+
+Cog::RenderTarget *OpenGLRenderer::GetRenderTarget()
+{
+	return this;
+}
+
+Cog::Texture *OpenGLRenderer::LoadTexture(const char *aFileName)
+{
+	return new OpenGLTexture(aFileName);
+}
+
+void OpenGLRenderer::Render(Cog::Texture *aTexture, Cog::Vector2f aPosition)
+{
+	Sprite sprite;
+	sprite.texture = (OpenGLTexture*)aTexture;
+	sprite.position = aPosition;
+	mySpriteBatch->Draw(sprite);
 }
 
 void OpenGLRenderer::TriggerEvents()
@@ -110,6 +141,17 @@ void OpenGLRenderer::TriggerEvents()
 
 void OpenGLRenderer::Clear()
 {
+	mySpriteBatch->viewPosition = Vector2();
+	int w,
+		h;
+	SDL_GetWindowSize(myWindow, &w, &h);
+	mySpriteBatch->viewSize = Vector2(static_cast<float>(w), static_cast<float>(h));
+	glViewport(0, 0, w, h);
+
+	glActiveTexture(GL_TEXTURE0);
+
+	myDefaultShader->Use();
+
 	Cog::Vector4f clearColor = GetBackgroundColor().ToVector4();
 	glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -117,6 +159,9 @@ void OpenGLRenderer::Clear()
 
 void OpenGLRenderer::PresentBackBuffer()
 {
+	// Draw buffered undrawn events
+	mySpriteBatch->DrawBuffer();
+
 	SDL_GL_SwapWindow(myWindow);
 }
 

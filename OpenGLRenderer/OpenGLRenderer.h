@@ -1,11 +1,20 @@
 #pragma once
 #include <RendererModule.h>
 #include <Window.h>
+#include <RenderTarget.h>
 
 struct SDL_Window;
 typedef void* SDL_GLContext;
 
-class OpenGLRenderer : public Cog::RendererModule, public Cog::Window
+namespace Cog
+{
+	class Texture;
+}
+
+class Shader;
+class SpriteBatch;
+
+class OpenGLRenderer : public Cog::RendererModule, public Cog::Window, public Cog::RenderTarget
 {
 public:
 	OpenGLRenderer();
@@ -14,6 +23,11 @@ public:
 	// Renderer abstract functions
 	Cog::Window *CreateHiddenWindowAndContext();
 	Cog::Window *GetWindow();
+	Cog::RenderTarget *GetRenderTarget();
+
+	Cog::Texture *LoadTexture(const char *aFileName);
+
+	void Render(Cog::Texture *aTexture, Cog::Vector2f aPosition);
 
 	void TriggerEvents();
 	void Clear();
@@ -26,4 +40,6 @@ public:
 private:
 	SDL_Window *myWindow;
 	SDL_GLContext myContext;
+	SpriteBatch *mySpriteBatch;
+	Shader *myDefaultShader;
 };

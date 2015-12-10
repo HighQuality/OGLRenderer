@@ -1,15 +1,23 @@
 #include "IEventListener.h"
 
-IEventListener::IEventListener()
+namespace Cog
 {
-	myHasStoppedListening = false;
-}
+	IEventListener::IEventListener()
+	{
+		myHasStoppedListening = false;
+	}
 
-bool IEventListener::HasStoppedListening() const
-{
-	return myHasStoppedListening;
-}
+	bool IEventListener::HasStoppedListening() const
+	{
+		return myHasStoppedListening;
+	}
 
-IEventListener::~IEventListener()
-{
+	void IEventListener::StopListen()
+	{
+		myHasStoppedListening = true;
+	}
+
+	IEventListener::~IEventListener()
+	{
+	}
 }

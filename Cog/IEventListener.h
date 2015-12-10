@@ -1,15 +1,19 @@
 #pragma once
 
-class IEventListener
+namespace Cog
 {
-public:
-	virtual ~IEventListener();
+	class IEventListener
+	{
+	public:
+		virtual ~IEventListener();
 
-	bool HasStoppedListening() const;
-	
-protected:
-	IEventListener();
+		void StopListen();
+		bool HasStoppedListening() const;
 
-private:
-	bool myHasStoppedListening;
-};
+	protected:
+		IEventListener();
+
+	private:
+		bool myHasStoppedListening;
+	};
+}

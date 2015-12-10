@@ -5,17 +5,18 @@
 #include <Engine.h>
 #include <OpenGLRenderer.h>
 #include <EventHost.h>
-#include <InitializeEvent.h>
+#include <SceneHost.h>
+#include <iostream>
+#include "MainScene.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	Cog::Engine::Initialize<OpenGLRenderer>();
 
-	Cog::Engine::GetEventHost()->RegisterEvent<Cog::InitializeEvent>([] (const Cog::InitializeEvent &ev)
-	{
-		
-	});
+	// Initialize the game
+	Cog::Engine::GetSceneHost()->Push(new MainScene());
 
+	// Start it
 	Cog::Engine::StartGame();
 
 	return 0;

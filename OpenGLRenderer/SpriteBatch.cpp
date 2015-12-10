@@ -16,59 +16,59 @@ void SpriteBatch::Draw(const Sprite &sprite)
 {
 	if (currentTexture == -1)
 	{
-		currentTexture = sprite.texture->textureHandle;
+		currentTexture = sprite.texture->myTextureHandle;
 	}
-	if (nextVertexIndex + 4 > 1024 || sprite.texture->textureHandle != currentTexture)
+	if (nextVertexIndex + 4 > 1024 || sprite.texture->myTextureHandle != currentTexture)
 	{
 		DrawBuffer();
-		currentTexture = sprite.texture->textureHandle;
+		currentTexture = sprite.texture->myTextureHandle;
 	}
 
-	Vector2 origin = Vector2(sprite.origin.X * sprite.scale.X, sprite.origin.Y * sprite.scale.Y);
+	Vector2 origin = Vector2(sprite.origin.x * sprite.scale.x, sprite.origin.y * sprite.scale.y);
 	
 	float rotation = sprite.rotation / 180.f * (float)PI;
 
-	float rX = sprite.texRectPosition.X,
-		rY = sprite.texRectPosition.Y,
-		rW = sprite.texRectSize.X,
-		rH = sprite.texRectSize.Y;
+	float rX = sprite.texRectPosition.x,
+		rY = sprite.texRectPosition.y,
+		rW = sprite.texRectSize.x,
+		rH = sprite.texRectSize.y;
 
-	int width = sprite.texture->width;
-	int height = sprite.texture->height;
+	int width = sprite.texture->myWidth;
+	int height = sprite.texture->myHeight;
 
-	Vector2 topLeft = Vector2(-origin.X, -origin.Y);
-	Vector2 topRight = Vector2(-origin.X + width * sprite.scale.X, -origin.Y);
-	Vector2 bottomRight = Vector2(-origin.X + width * sprite.scale.X, -origin.Y + height * sprite.scale.Y);
-	Vector2 bottomLeft = Vector2(-origin.X, -origin.Y + height * sprite.scale.Y);
+	Vector2 topLeft = Vector2(-origin.x, -origin.y);
+	Vector2 topRight = Vector2(-origin.x + width * sprite.scale.x, -origin.y);
+	Vector2 bottomRight = Vector2(-origin.x + width * sprite.scale.x, -origin.y + height * sprite.scale.y);
+	Vector2 bottomLeft = Vector2(-origin.x, -origin.y + height * sprite.scale.y);
 	
 	float sin = (float)std::sin(rotation);
 	float cos = (float)std::cos(rotation);
 
-	topLeft = Vector2(topLeft.X * cos - topLeft.Y * sin, topLeft.X * sin + topLeft.Y * cos);
-	topRight = Vector2(topRight.X * cos - topRight.Y * sin, topRight.X * sin + topRight.Y * cos);
-	bottomRight = Vector2(bottomRight.X * cos - bottomRight.Y * sin, bottomRight.X * sin + bottomRight.Y * cos);
-	bottomLeft = Vector2(bottomLeft.X * cos - bottomLeft.Y * sin, bottomLeft.X * sin + bottomLeft.Y * cos);
+	topLeft = Vector2(topLeft.x * cos - topLeft.y * sin, topLeft.x * sin + topLeft.y * cos);
+	topRight = Vector2(topRight.x * cos - topRight.y * sin, topRight.x * sin + topRight.y * cos);
+	bottomRight = Vector2(bottomRight.x * cos - bottomRight.y * sin, bottomRight.x * sin + bottomRight.y * cos);
+	bottomLeft = Vector2(bottomLeft.x * cos - bottomLeft.y * sin, bottomLeft.x * sin + bottomLeft.y * cos);
 	
-	topLeft.X += sprite.position.X;
-	topLeft.Y += sprite.position.Y;
-	bottomLeft.X += sprite.position.X;
-	bottomLeft.Y += sprite.position.Y;
-	topRight.X += sprite.position.X;
-	topRight.Y += sprite.position.Y;
-	bottomRight.X += sprite.position.X;
-	bottomRight.Y += sprite.position.Y;
+	topLeft.x += sprite.position.x;
+	topLeft.y += sprite.position.y;
+	bottomLeft.x += sprite.position.x;
+	bottomLeft.y += sprite.position.y;
+	topRight.x += sprite.position.x;
+	topRight.y += sprite.position.y;
+	bottomRight.x += sprite.position.x;
+	bottomRight.y += sprite.position.y;
 	
-	topLeft.X = (topLeft.X / viewSize.X * 2.f) - 1.f;
-	topLeft.Y = -1.f * ((topLeft.Y / viewSize.Y * 2.f) - 1.f);
+	topLeft.x = (topLeft.x / viewSize.x * 2.f) - 1.f;
+	topLeft.y = -1.f * ((topLeft.y / viewSize.y * 2.f) - 1.f);
 
-	topRight.X = (topRight.X / viewSize.X * 2.f) - 1.f;
-	topRight.Y = -1.f * ((topRight.Y / viewSize.Y * 2.f) - 1.f);
+	topRight.x = (topRight.x / viewSize.x * 2.f) - 1.f;
+	topRight.y = -1.f * ((topRight.y / viewSize.y * 2.f) - 1.f);
 
-	bottomRight.X = (bottomRight.X / viewSize.X * 2.f) - 1.f;
-	bottomRight.Y = -1.f * ((bottomRight.Y / viewSize.Y * 2.f) - 1.f);
+	bottomRight.x = (bottomRight.x / viewSize.x * 2.f) - 1.f;
+	bottomRight.y = -1.f * ((bottomRight.y / viewSize.y * 2.f) - 1.f);
 
-	bottomLeft.X = (bottomLeft.X / viewSize.X * 2.f) - 1.f;
-	bottomLeft.Y = -1.f * ((bottomLeft.Y / viewSize.Y * 2.f) - 1.f);
+	bottomLeft.x = (bottomLeft.x / viewSize.x * 2.f) - 1.f;
+	bottomLeft.y = -1.f * ((bottomLeft.y / viewSize.y * 2.f) - 1.f);
 
 	vertices[nextVertexIndex++] = Vertex(topLeft, Vector2(rX, rY), sprite.color);
 	vertices[nextVertexIndex++] = Vertex(topRight, Vector2(rX + rW, rY), sprite.color);

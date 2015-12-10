@@ -4,7 +4,9 @@
 namespace Cog
 {
 	class Window;
-	
+	class RenderTarget;
+	class Texture;
+
 	class RendererModule
 	{
 	public:
@@ -16,6 +18,10 @@ namespace Cog
 		virtual void TriggerEvents() = 0;
 		virtual void Clear() = 0;
 		virtual void PresentBackBuffer() = 0;
+
+		virtual RenderTarget *GetRenderTarget() = 0;
+
+		virtual Texture *LoadTexture(const char *aFileName) = 0;
 
 		void SetBackgroundColor(const Color &aColor);
 		inline Color GetBackgroundColor() const;

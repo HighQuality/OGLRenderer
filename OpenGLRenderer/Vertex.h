@@ -1,7 +1,13 @@
 #pragma once
 
-#include "Vector3.h"
+#include <Vector2.h>
+#include <Vector3.h>
+#include <Vector4.h>
 #include <GL/glew.h>
+
+using Vector2 = Cog::Vector2f;
+using Vector3 = Cog::Vector3f;
+using Vector4 = Cog::Vector4f;
 
 struct Vertex
 {

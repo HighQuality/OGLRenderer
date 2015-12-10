@@ -1,11 +1,11 @@
-#include "Texture.h"
+#include "OpenGLTexture.h"
 #include <SDL_image.h>
 #include <string>
 
-Texture::Texture(const std::string &fileName)
+OpenGLTexture::OpenGLTexture(const std::string &fileName)
 {
-	glGenTextures(1, &textureHandle);
-	glBindTexture(GL_TEXTURE_2D, textureHandle);
+	glGenTextures(1, &myTextureHandle);
+	glBindTexture(GL_TEXTURE_2D, myTextureHandle);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
@@ -14,8 +14,8 @@ Texture::Texture(const std::string &fileName)
 	
 	SDL_Surface* surface = IMG_Load(fileName.c_str());
 
-	width = surface->w;
-	height = surface->h;
+	myWidth = surface->w;
+	myHeight = surface->h;
 
 	int mode = GL_RGB;
 
@@ -31,12 +31,18 @@ Texture::Texture(const std::string &fileName)
 	SDL_FreeSurface(surface);
 }
 
-void Texture::Bind() const
+Cog::Vector2ui OpenGLTexture::GetSize() const
 {
-	glBindTexture(GL_TEXTURE_2D, textureHandle);
+	return Cog::Vector2ui(myWidth, myHeight);
 }
 
-Texture::~Texture()
+void OpenGLTexture::Bind() const
 {
-	glDeleteTextures(1, &textureHandle);
+	glBindTexture(GL_TEXTURE_2D, myTextureHandle);
+}
+
+OpenGLTexture::~OpenGLTexture()
+{
+	glDeleteTextures(1, &myTextureHandle);
+	myTextureHandle = 0;
 }

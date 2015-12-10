@@ -3,46 +3,49 @@
 #include <functional>
 #include "EventListener.h"
 
-template <typename TEventType>
-class EventCollection
+namespace Cog
 {
-public:
-	template <typename TEventCatcher>
-	static EventListener<TEventType> &RegisterEvent(TEventCatcher &aCatcher)
+	template <typename TEventType>
+	class EventCollection
 	{
-		myListeners.push_back(EventListener<TEventType>());
-		myListeners[myListeners.size() - 1].SetCatcher(aCatcher);
-		return myListeners[myListeners.size() - 1];
-	}
-
-	static void TriggerEvent(TEventType &aEvent)
-	{
-		for (int i = 0; i < static_cast<int>(myListeners.size()); i++)
+	public:
+		template <typename TEventCatcher>
+		static EventListener<TEventType> &RegisterEvent(TEventCatcher &aCatcher)
 		{
-			if (myListeners[i].HasStoppedListening() == false)
-			{
-				myListeners[i].Invoke(aEvent);
+			myListeners.push_back(EventListener<TEventType>());
+			myListeners[myListeners.size() - 1].SetCatcher(aCatcher);
+			return myListeners[myListeners.size() - 1];
+		}
 
-				if (aEvent.IsInterrupted() == true)
+		static void TriggerEvent(TEventType &aEvent)
+		{
+			for (int i = 0; i < static_cast<int>(myListeners.size()); i++)
+			{
+				if (myListeners[i].HasStoppedListening() == false)
 				{
-					break;
+					myListeners[i].Invoke(aEvent);
+
+					if (aEvent.IsInterrupted() == true)
+					{
+						break;
+					}
+				}
+				else
+				{
+					myListeners.erase(myListeners.begin() + i);
+					i--;
 				}
 			}
-			else
-			{
-				myListeners.erase(myListeners.begin() + i);
-				i--;
-			}
 		}
-	}
 
-private:
-	static std::vector <EventListener<TEventType>> myListeners;
+	private:
+		static std::vector <EventListener<TEventType>> myListeners;
 
-	EventCollection()
-	{
-	}
-};
+		EventCollection()
+		{
+		}
+	};
 
-template <typename TEventType>
-std::vector<EventListener<TEventType>> EventCollection<TEventType>::myListeners;
+	template <typename TEventType>
+	std::vector<EventListener<TEventType>> EventCollection<TEventType>::myListeners;
+}

@@ -19,12 +19,6 @@ namespace Cog
 			y = aVector3.y;
 			z = aVector3.z;
 		}
-		explicit Vector3(const Vector4<TYPE> &aVector4)
-		{
-			x = aVector4.x;
-			y = aVector4.y;
-			z = aVector4.z;
-		}
 		template<typename U> explicit Vector3(const Vector3<U> &aVector)
 		{
 			x = static_cast<TYPE>(aVector.x);
@@ -88,13 +82,6 @@ namespace Cog
 		}
 
 		Vector3 &operator =(const Vector3 &aRight)
-		{
-			x = aRight.x;
-			y = aRight.y;
-			z = aRight.z;
-			return *this;
-		}
-		Vector3 &operator =(const Vector4<TYPE> &aRight)
 		{
 			x = aRight.x;
 			y = aRight.y;

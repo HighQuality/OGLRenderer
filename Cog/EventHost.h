@@ -10,16 +10,16 @@ namespace Cog
 		~EventHost();
 
 		template <typename TEventType, typename TEventCatcher>
-		void RegisterEvent(TEventCatcher &aCatcher);
+		EventListener<TEventType> RegisterEvent(TEventCatcher &aCatcher);
 
 		template <typename TEventType>
 		void TriggerEvent(TEventType &aEvent);
 	};
 
 	template <typename TEventType, typename TEventCatcher>
-	void EventHost::RegisterEvent(TEventCatcher &aCatcher)
+	EventListener<TEventType> EventHost::RegisterEvent(TEventCatcher &aCatcher)
 	{
-		EventCollection<TEventType>::RegisterEvent(aCatcher);
+		return EventCollection<TEventType>::RegisterEvent(aCatcher);
 	}
 
 	template <typename TEventType>

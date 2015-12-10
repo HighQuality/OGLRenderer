@@ -1,29 +1,31 @@
 #pragma once
 #include "IEventListener.h"
 
-template<typename TEventType>
-class EventListener : public IEventListener
+namespace Cog
 {
-public:
-	EventListener()
+	template<typename TEventType>
+	class EventListener : public IEventListener
 	{
-	}
-	~EventListener()
-	{
-	}
+	public:
+		EventListener()
+		{
+		}
+		~EventListener()
+		{
+		}
 
-	template <typename TEventCatcher>
-	void SetCatcher(TEventCatcher aEventCatcher)
-	{
-		myEventCatcher = aEventCatcher;
-	}
+		template <typename TEventCatcher>
+		void SetCatcher(TEventCatcher aEventCatcher)
+		{
+			myEventCatcher = aEventCatcher;
+		}
 
-	void Invoke(TEventType &aEvent) const
-	{
-		myEventCatcher(aEvent);
-	}
+		void Invoke(TEventType &aEvent) const
+		{
+			myEventCatcher(aEvent);
+		}
 
-private:
-	std::function<void(TEventType&)> myEventCatcher;
-};
-
+	private:
+		std::function<void(TEventType&)> myEventCatcher;
+	};
+}
