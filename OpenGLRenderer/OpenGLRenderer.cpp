@@ -3,6 +3,9 @@
 #include <SDL.h>
 #include <GL/glew.h>
 #include <SDL_image.h>
+#include <Engine.h>
+#include <CloseButtonPressedEvent.h>
+#include <EventHost.h>
 
 OpenGLRenderer::OpenGLRenderer()
 {
@@ -85,7 +88,7 @@ void OpenGLRenderer::TriggerEvents()
 	{
 		if (event.type == SDL_QUIT)
 		{
-			// TODO: Send Cog::CloseButtonPressed
+			Cog::Engine::GetEventHost()->TriggerEvent(Cog::CloseButtonPressedEvent());
 		}
 		else if (event.type == SDL_KEYDOWN)
 		{

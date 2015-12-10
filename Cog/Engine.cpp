@@ -2,6 +2,7 @@
 #include "RendererModule.h"
 #include "EventHost.h"
 #include "InitializeEvent.h"
+#include "CloseButtonPressedEvent.h"
 #include "Window.h"
 
 namespace Cog
@@ -39,12 +40,16 @@ namespace Cog
 		// Create a hidden window and a graphics context
 		myRenderer->CreateHiddenWindowAndContext();
 
+		myEventHost->RegisterEvent<CloseButtonPressedEvent>([&](CloseButtonPressedEvent &ev) {
+			myGameIsRunning = false;
+		});
+
 		myEventHost->TriggerEvent(InitializeEvent());
 
 		// Show the window
 		myRenderer->GetWindow()->SetVisible(true);
 
-		while (myGameIsRunning = true)
+		while (myGameIsRunning == true)
 		{
 			myRenderer->TriggerEvents();
 

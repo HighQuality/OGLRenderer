@@ -11,11 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CloseButtonPressedEvent.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EngineDeinitializer.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventCollection.h" />
     <ClInclude Include="EventHost.h" />
+    <ClInclude Include="EventListener.h" />
+    <ClInclude Include="IEventListener.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="InitializeEvent.h" />
     <ClInclude Include="RendererModule.h" />
@@ -25,11 +29,13 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CloseButtonPressedEvent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EngineDeinitializer.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventHost.cpp" />
+    <ClCompile Include="IEventListener.cpp" />
     <ClCompile Include="InitializeEvent.cpp" />
     <ClCompile Include="RendererModule.cpp" />
     <ClCompile Include="Window.cpp" />

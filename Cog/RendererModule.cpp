@@ -4,7 +4,7 @@ namespace Cog
 {
 	RendererModule::RendererModule()
 	{
-		myBackgroundColor = Color::White;
+		myBackgroundColor = Color::CornflowerBlue;
 	}
 
 	RendererModule::~RendererModule()
