@@ -110,6 +110,7 @@ namespace Cog
 			z *= aRight;
 			return *this;
 		}
+
 		Vector3 &operator /=(const TYPE aRight)
 		{
 			x /= aRight;

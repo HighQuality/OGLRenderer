@@ -29,6 +29,8 @@
     <ClInclude Include="IEventListener.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Matrix33.h" />
+    <ClInclude Include="Matrix44.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="RendererModule.h" />
     <ClInclude Include="RenderTarget.h" />

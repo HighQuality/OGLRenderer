@@ -111,6 +111,12 @@
     <ClInclude Include="EndUpdateEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix33.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix44.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp">

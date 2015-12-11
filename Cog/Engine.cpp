@@ -118,6 +118,8 @@ namespace Cog
 
 			myRenderer->PresentBackBuffer();
 
+			std::this_thread::sleep_for(std::chrono::microseconds(1));
+
 			// Wait for the game logic update to finish
 			gameLogicWork->Wait();
 
