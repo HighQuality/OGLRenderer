@@ -29,7 +29,6 @@
     <ClInclude Include="IEventListener.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="Matrix.h" />
     <ClInclude Include="RenderCommand.h" />
     <ClInclude Include="RendererModule.h" />
     <ClInclude Include="RenderTarget.h" />
@@ -39,7 +38,9 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="UpdateEvent.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WorkItem.h" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include <vector>
-#include "Vector.h"
+#include "Vector2.h"
 #include "EventHost.h"
 
 namespace Cog
