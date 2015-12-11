@@ -153,12 +153,12 @@ namespace Cog
 				0, 0, 1);
 		}
 
-		static Matrix33 CreateScale(const TYPE aX, const TYPE aY)
+		static Matrix33 CreateScale(const TYPE aX, const TYPE aY, const TYPE aZ)
 		{
 			return Matrix33(
 				aX, 0, 0,
 				0, aY, 0,
-				0, 0, 1);
+				0, 0, aZ);
 		}
 
 		// Creates a transformation matrix for rotating anAngle rad around the x-axis

@@ -2,6 +2,7 @@
 #include "EngineDeinitializer.h"
 #include "RenderCommand.h"
 #include <vector>
+#include <thread>
 
 namespace Cog
 {
@@ -23,6 +24,7 @@ namespace Cog
 		static RendererModule *GetRenderer();
 		static EventHost *GetEventHost();
 		static SceneHost *GetSceneHost();
+		static ThreadPool *GetThreadPool();
 		static void ScheduleRendering(const RenderCommand &aRenderCommand);
 		static bool IsInitialized();
 

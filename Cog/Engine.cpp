@@ -12,6 +12,10 @@
 #include "WorkItem.h"
 #include "RenderTarget.h"
 #include "EndUpdateEvent.h"
+#include "Matrix33.h"
+#include "Transformation.h"
+#include "GameScene.h"
+#include "CameraObject.h"
 
 namespace Cog
 {
@@ -78,9 +82,12 @@ namespace Cog
 		Stopwatch stopwatch;
 		std::vector<RenderCommand> *currentRenderCommands = new std::vector<RenderCommand>();
 
+		float time = 0.f;
+
 		while (myGameIsRunning == true)
 		{
 			float deltaTime = stopwatch.GetElapsedSeconds();
+			time += deltaTime;
 			stopwatch.Restart();
 
 			myRenderer->TriggerEvents();
@@ -90,6 +97,9 @@ namespace Cog
 			float progressToNextFixedUpdate = (myTimeAccumulator / myTimeStep);
 
 			myTimeAccumulator += deltaTime;
+
+			Matrix33f worldToViewport;
+			Transformation cameraTransformation = mySceneHost->GetCurrentScene()->GetCamera().GetTransformation();
 
 			auto gameLogicWork = myThreadPool->QueueWorkItem(std::function<void()>([=]
 			{
@@ -102,6 +112,11 @@ namespace Cog
 
 				myEventHost->TriggerEvent(DrawEvent());
 			}));
+
+			Vector2f windowSize = Vector2f(myRenderer->GetWindow()->GetSize());
+			worldToViewport *= Matrix33f::CreateScale(2.f / windowSize.x, -2.f / windowSize.y, 1.f) * Matrix33f::CreateTranslation(-cameraTransformation.Position.x, -cameraTransformation.Position.y) * Matrix33f::CreateRotateAroundZ(cameraTransformation.Rotation);
+
+			myRenderer->SetWorldToViewportMatrix(worldToViewport);
 
 			myRenderer->Clear();
 			RenderTarget &renderTarget = *myRenderer->GetRenderTarget();
@@ -118,6 +133,7 @@ namespace Cog
 
 			myRenderer->PresentBackBuffer();
 
+			float beginSleep = stopwatch.GetElapsedSeconds();
 			std::this_thread::sleep_for(std::chrono::microseconds(1));
 
 			// Wait for the game logic update to finish
@@ -147,6 +163,11 @@ namespace Cog
 	SceneHost *Engine::GetSceneHost()
 	{
 		return mySceneHost;
+	}
+
+	ThreadPool *Engine::GetThreadPool()
+	{
+		return myThreadPool;
 	}
 
 	void Engine::ScheduleRendering(const RenderCommand &aRenderCommand)

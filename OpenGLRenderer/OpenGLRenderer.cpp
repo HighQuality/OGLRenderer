@@ -9,6 +9,7 @@
 #include "OpenGLTexture.h"
 #include "Shader.h"
 #include "SpriteBatch.h"
+#include <Matrix33.h>
 
 OpenGLRenderer::OpenGLRenderer()
 {
@@ -23,7 +24,7 @@ OpenGLRenderer::~OpenGLRenderer()
 
 	delete mySpriteBatch;
 	mySpriteBatch = nullptr;
-
+	
 	SDL_GL_DeleteContext(myContext);
 	SDL_DestroyWindow(myWindow);
 	SDL_Quit();
@@ -47,7 +48,7 @@ Cog::Window *OpenGLRenderer::CreateHiddenWindowAndContext()
 	std::string windowTitle = "Hello World!";
 	int resolutionWidth = 1280;
 	int resolutionHeight = 720;
-	SDL_WindowFlags flags = (SDL_WindowFlags)(SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
+	SDL_WindowFlags flags = (SDL_WindowFlags)(SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
 
 	myWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, resolutionWidth, resolutionHeight, flags);
 	if (myWindow == nullptr)
@@ -78,7 +79,7 @@ Cog::Window *OpenGLRenderer::CreateHiddenWindowAndContext()
 	{
 		printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
 	}
-
+	
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -102,6 +103,11 @@ Cog::RenderTarget *OpenGLRenderer::GetRenderTarget()
 Cog::Texture *OpenGLRenderer::LoadTexture(const char *aFileName)
 {
 	return new OpenGLTexture(aFileName);
+}
+
+void OpenGLRenderer::SetWorldToViewportMatrix(Cog::Matrix33<float> &aWorldToViewportMatrix)
+{
+	myDefaultShader->SetMatrix("uWorldToViewport", aWorldToViewportMatrix);
 }
 
 void OpenGLRenderer::Render(Cog::Texture *aTexture, Cog::Vector2f aPosition)
@@ -141,11 +147,9 @@ void OpenGLRenderer::TriggerEvents()
 
 void OpenGLRenderer::Clear()
 {
-	mySpriteBatch->viewPosition = Vector2();
 	int w,
 		h;
 	SDL_GetWindowSize(myWindow, &w, &h);
-	mySpriteBatch->viewSize = Vector2(static_cast<float>(w), static_cast<float>(h));
 	glViewport(0, 0, w, h);
 
 	glActiveTexture(GL_TEXTURE0);
@@ -167,7 +171,10 @@ void OpenGLRenderer::PresentBackBuffer()
 
 Cog::Vector2ui OpenGLRenderer::GetSize() const
 {
-	return Cog::Vector2ui();
+	int width,
+		height;
+	SDL_GetWindowSize(myWindow, &width, &height);
+	return Cog::Vector2ui(width, height);
 }
 
 void OpenGLRenderer::SetVisible(bool aIsVisible)

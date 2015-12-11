@@ -8,6 +8,8 @@ typedef void* SDL_GLContext;
 
 namespace Cog
 {
+	template<typename T>
+	class Matrix33;
 	class Texture;
 }
 
@@ -27,6 +29,7 @@ public:
 
 	Cog::Texture *LoadTexture(const char *aFileName);
 
+	void SetWorldToViewportMatrix(Cog::Matrix33<float> &aWorldToViewportMatrix);
 	void Render(Cog::Texture *aTexture, Cog::Vector2f aPosition);
 
 	void TriggerEvents();

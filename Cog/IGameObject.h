@@ -3,6 +3,7 @@
 #include <vector>
 #include "Vector2.h"
 #include "EventHost.h"
+#include "Transformation.h"
 
 namespace Cog
 {
@@ -42,11 +43,16 @@ namespace Cog
 
 		inline void SetPosition(Vector2f aPosition)
 		{
-			myPosition = aPosition;
+			myTransformation.Position = aPosition;
 		}
 		inline Vector2f GetPosition() const
 		{
-			return myPosition;
+			return myTransformation.Position;
+		}
+
+		const Transformation &GetTransformation() const
+		{
+			return myTransformation;
 		}
 
 	private:
@@ -56,6 +62,6 @@ namespace Cog
 		std::vector<IEventListener*> myListeners;
 
 		GameScene *myScene;
-		Vector2f myPosition;
+		Transformation myTransformation;
 	};
 }

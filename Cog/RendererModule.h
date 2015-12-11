@@ -6,6 +6,8 @@ namespace Cog
 	class Window;
 	class RenderTarget;
 	class Texture;
+	template <typename T>
+	class Matrix33;
 
 	class RendererModule
 	{
@@ -16,6 +18,7 @@ namespace Cog
 		virtual Window *GetWindow() = 0;
 
 		virtual void TriggerEvents() = 0;
+		virtual void SetWorldToViewportMatrix(Matrix33<float> &aWorldToViewportMatrix) = 0;
 		virtual void Clear() = 0;
 		virtual void PresentBackBuffer() = 0;
 

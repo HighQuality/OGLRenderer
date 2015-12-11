@@ -4,6 +4,7 @@
 namespace Cog
 {
 	class IGameObject;
+	class CameraObject;
 
 	class GameScene
 	{
@@ -11,9 +12,17 @@ namespace Cog
 		GameScene();
 		virtual ~GameScene();
 
-		void AddObject(IGameObject *aObject);
+		template<typename T>
+		T *AddObject(T *aObject)
+		{
+			myObjects.push_back(aObject);
+			return aObject;
+		}
+
+		CameraObject &GetCamera() const;
 
 	private:
 		std::vector<IGameObject*> myObjects;
+		CameraObject *myCamera;
 	};
 }

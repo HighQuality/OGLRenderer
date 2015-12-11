@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AwaitableSignal.h" />
+    <ClInclude Include="CameraObject.h" />
     <ClInclude Include="CloseButtonPressedEvent.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DrawEvent.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="Transformation.h" />
     <ClInclude Include="UpdateEvent.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
@@ -48,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AwaitableSignal.cpp" />
+    <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="CloseButtonPressedEvent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DrawEvent.cpp" />

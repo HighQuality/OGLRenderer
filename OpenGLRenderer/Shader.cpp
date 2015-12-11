@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include <vector>
 #include <string>
+#include <Matrix33.h>
 
 void printProgramLog(GLuint program)
 {
@@ -78,9 +79,10 @@ Shader::Shader()
 		"attribute vec4 aColor;\n"
 		"varying vec2 TexCoord0;\n"
 		"varying vec4 Color;\n"
+		"uniform mat3 uWorldToViewport;\n"
 		"void main()\n"
 		"{\n"
-		"gl_Position = vec4(aPosition, 0.0, 1.0);\n"
+		"gl_Position = vec4(vec3(aPosition, 1.0) * uWorldToViewport, 1.0);\n"
 		"TexCoord0 = aTexCoord;\n"
 		"Color = aColor;\n"
 		"}"
@@ -134,10 +136,19 @@ Shader::Shader()
 
 	glValidateProgram(program);
 }
+
 void Shader::Use()
 {
 	glUseProgram(program);
 }
+
+void Shader::SetMatrix(const char *aUniformName, Cog::Matrix33f &aMatrix)
+{
+	GLuint location = glGetUniformLocation(program, aUniformName);
+	Use();
+	glUniformMatrix3fv(location, 1, GL_FALSE, &aMatrix.m11);
+}
+
 Shader::~Shader()
 {
 	glDeleteProgram(program);

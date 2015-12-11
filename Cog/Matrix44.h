@@ -161,6 +161,16 @@ namespace Cog
 				);
 		}
 
+		static Matrix44 CreateScale(const TYPE x, const TYPE y, const TYPE z)
+		{
+			return Matrix44(
+				x, 0, 0, 0,
+				0, y, 0, 0,
+				0, 0, z, 0,
+				0, 0, 0, 1
+				);
+		}
+		
 		// Creates a transformation matrix for rotating anAngle rad around the x-axis
 		//
 		static Matrix44 CreateRotateAroundX(const TYPE anAngle);

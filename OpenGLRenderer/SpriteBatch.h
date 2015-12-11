@@ -16,9 +16,6 @@ public:
 
 	~SpriteBatch();
 
-	Vector2 viewPosition,
-		viewSize;
-
 private:
 	GLBuffer buffer;
 	Vertex vertices[1024];

@@ -41,8 +41,8 @@ void SpriteBatch::Draw(const Sprite &sprite)
 	Vector2 bottomRight = Vector2(-origin.x + width * sprite.scale.x, -origin.y + height * sprite.scale.y);
 	Vector2 bottomLeft = Vector2(-origin.x, -origin.y + height * sprite.scale.y);
 	
-	float sin = (float)std::sin(rotation);
-	float cos = (float)std::cos(rotation);
+	const float sin = static_cast<float>(std::sin(rotation));
+	const float cos = static_cast<float>(std::cos(rotation));
 
 	topLeft = Vector2(topLeft.x * cos - topLeft.y * sin, topLeft.x * sin + topLeft.y * cos);
 	topRight = Vector2(topRight.x * cos - topRight.y * sin, topRight.x * sin + topRight.y * cos);
@@ -58,18 +58,6 @@ void SpriteBatch::Draw(const Sprite &sprite)
 	bottomRight.x += sprite.position.x;
 	bottomRight.y += sprite.position.y;
 	
-	topLeft.x = (topLeft.x / viewSize.x * 2.f) - 1.f;
-	topLeft.y = -1.f * ((topLeft.y / viewSize.y * 2.f) - 1.f);
-
-	topRight.x = (topRight.x / viewSize.x * 2.f) - 1.f;
-	topRight.y = -1.f * ((topRight.y / viewSize.y * 2.f) - 1.f);
-
-	bottomRight.x = (bottomRight.x / viewSize.x * 2.f) - 1.f;
-	bottomRight.y = -1.f * ((bottomRight.y / viewSize.y * 2.f) - 1.f);
-
-	bottomLeft.x = (bottomLeft.x / viewSize.x * 2.f) - 1.f;
-	bottomLeft.y = -1.f * ((bottomLeft.y / viewSize.y * 2.f) - 1.f);
-
 	vertices[nextVertexIndex++] = Vertex(topLeft, Vector2(rX, rY), sprite.color);
 	vertices[nextVertexIndex++] = Vertex(topRight, Vector2(rX + rW, rY), sprite.color);
 	vertices[nextVertexIndex++] = Vertex(bottomRight, Vector2(rX + rW, rY + rH), sprite.color);

@@ -1,10 +1,17 @@
 #include "GameScene.h"
 #include "IGameObject.h"
+#include "CameraObject.h"
 
 namespace Cog
 {
 	GameScene::GameScene()
 	{
+		myCamera = AddObject(new CameraObject());
+	}
+	
+	CameraObject &GameScene::GetCamera() const
+	{
+		return *myCamera;
 	}
 
 	GameScene::~GameScene()
@@ -14,10 +21,5 @@ namespace Cog
 			delete myObjects[i];
 		}
 		myObjects.clear();
-	}
-
-	void GameScene::AddObject(IGameObject *aObject)
-	{
-		myObjects.push_back(aObject);
 	}
 }
