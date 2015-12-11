@@ -8,6 +8,13 @@
 #include <SceneHost.h>
 #include <iostream>
 #include "MainScene.h"
+#include <Matrix.h>
+
+template class Cog::Matrix<4, 4, float>;
+template class Cog::Matrix<4, 4, double>;
+
+template class Cog::Matrix<3, 3, float>;
+template class Cog::Matrix<3, 3, double>;
 
 int _tmain(int argc, _TCHAR* argv[])
 {

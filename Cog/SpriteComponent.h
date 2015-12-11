@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObjectComponent.h"
-#include "Vector2.h"
+#include "Vector.h"
 
 namespace Cog
 {

@@ -47,7 +47,7 @@ Cog::Window *OpenGLRenderer::CreateHiddenWindowAndContext()
 	std::string windowTitle = "Hello World!";
 	int resolutionWidth = 1280;
 	int resolutionHeight = 720;
-	SDL_WindowFlags flags = (SDL_WindowFlags)(SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
+	SDL_WindowFlags flags = (SDL_WindowFlags)(SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	myWindow = SDL_CreateWindow(windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, resolutionWidth, resolutionHeight, flags);
 	if (myWindow == nullptr)
